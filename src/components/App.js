@@ -19,9 +19,17 @@ class App extends React.Component {
     })
   }
 
-  willWatchMovie = data => {
+  addWillWatchMovie = data => {
     this.setState({
       moviesWillWatch: [...this.state.moviesWillWatch, data]
+    })
+  }
+
+  deleteWillWatchMovie = data => {
+    this.setState({
+      moviesWillWatch: this.state.moviesWillWatch.filter(movie => {
+        return movie.id !== data.id
+      })
     })
   }
 
@@ -37,7 +45,8 @@ class App extends React.Component {
                     <Movie  
                       data={movie} 
                       deleteMovie={this.deleteMovie}
-                      willWatchMovie={this.willWatchMovie}
+                      addWillWatchMovie={this.addWillWatchMovie}
+                      deleteWillWatchMovie={this.deleteWillWatchMovie}
                     ></Movie>
                   </div>
                 )
