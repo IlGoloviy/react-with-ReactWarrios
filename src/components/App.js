@@ -6,12 +6,12 @@ class App extends React.Component {
   constructor(props) {
     super();
     this.state = {
-      movies: moviesData
+      movies: moviesData,
+      moviesWillWatch: []
     }
-    this.deleteMovie = this.deleteMovie.bind(this);
   }
 
-  deleteMovie(data) {
+  deleteMovie = data => {
     this.setState({
       movies: this.state.movies.filter(movie => {
         return movie.id !== data.id
@@ -19,17 +19,36 @@ class App extends React.Component {
     })
   }
 
+  willWatchMovie = data => {
+    this.setState({
+      moviesWillWatch: [...this.state.moviesWillWatch, data]
+    })
+  }
+
   render() {
     return (
-      <div>
-        {this.state.movies.map(movie => {
-          return <Movie 
-            key={movie.id} 
-            data={movie} 
-            deleteMovie={this.deleteMovie}
-          ></Movie>
-        })}
-      </div>
+      <div className="container">
+        <div className="row">
+          <div className="col-9">
+            <div className="row">
+              {this.state.movies.map(movie => {
+                return (
+                  <div className="col-6 mb-4" key={movie.id}>
+                    <Movie  
+                      data={movie} 
+                      deleteMovie={this.deleteMovie}
+                      willWatchMovie={this.willWatchMovie}
+                    ></Movie>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+          <div className="col-3">
+            <p>Will Watch: {this.state.moviesWillWatch.length}</p>
+          </div>
+        </div>
+      </div> 
     );
   }
 }
