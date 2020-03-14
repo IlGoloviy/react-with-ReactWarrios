@@ -3,18 +3,20 @@ import axios from 'axios';
 import { API_URL, API_KEY_3 } from '../utils/api';
 
 import Movie from './Movie';
+import MovieTabs from './MovieTabs';
 
 class App extends React.Component {
   constructor(props) {
     super();
     this.state = {
       movies: [],
-      moviesWillWatch: []
+      moviesWillWatch: [],
+      sort_by: 'popularity.desc'
     }
   }
 
   componentDidMount() {
-    axios.get(`${API_URL}/discover/movie?api_key=${API_KEY_3}`)
+    axios.get(`${API_URL}/discover/movie?api_key=${API_KEY_3}&sort_by=${this.state.sort_by}`)
       .then(res => {
         this.setState({movies: res.data.results})
       })
@@ -42,12 +44,26 @@ class App extends React.Component {
     })
   }
 
+  updateSortBy = value => {
+    this.setState({
+      sort_by: value
+    })
+  }
+
   render() {
     if (this.state.movies.length) {
       return (
         <div className="container">
-          <div className="row">
+          <div className="row mt-4">
             <div className="col-9">
+              <div className="row mb-4">
+                <div className="col-12">
+                  <MovieTabs 
+                    sort_by={this.state.sort_by}
+                    updateSortBy={this.updateSortBy}
+                  />
+                </div>
+              </div>
               <div className="row">
                 {this.state.movies.map(movie => {
                   return (
