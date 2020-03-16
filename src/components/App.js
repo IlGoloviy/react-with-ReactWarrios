@@ -50,6 +50,15 @@ class App extends React.Component {
     })
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.sort_by !== this.state.sort_by) {
+      axios.get(`${API_URL}/discover/movie?api_key=${API_KEY_3}&sort_by=${this.state.sort_by}`)
+      .then(res => {
+        this.setState({movies: res.data.results})
+      })
+    }
+  }
+
   render() {
     if (this.state.movies.length) {
       return (
