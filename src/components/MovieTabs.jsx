@@ -10,7 +10,7 @@ const MovieTabs = (props) => {
   }
 
   const getClassLink = value => {
-    return `nav-link ${sort_by === value ? 'active' : ''}`;
+    return `nav-link cursor ${sort_by === value ? 'active' : ''}`;
   }
 
   return (
@@ -33,10 +33,10 @@ const MovieTabs = (props) => {
       </li>
       <li className="nav-item">
         <div
-          className={getClassLink('original_title.desc')}
-          onClick={handleClick('original_title.desc')}
+          className={getClassLink('vote_count.desc')}
+          onClick={handleClick('vote_count.desc')}
         >
-          Original_title
+          Vote_count
         </div>
       </li>
     </ul>

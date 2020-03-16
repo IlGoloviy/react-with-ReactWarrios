@@ -14,8 +14,8 @@ class Movie extends React.Component {
       <div className="card">
         <img
           className="card-img-top"
-          src={`https://image.tmdb.org/t/p/w500${data.backdrop_path ||
-            data.poster_path}`}
+          src={data.backdrop_path !== null ? `https://image.tmdb.org/t/p/w500${data.backdrop_path ||
+            data.poster_path}` : 'http://denrakaev.com/wp-content/uploads/2015/03/no-image-800x511.png'}
           alt="poster"
         />
         <div className="card-body">
@@ -31,7 +31,7 @@ class Movie extends React.Component {
                   deleteWillWatchMovie(data)
                 }}
               >
-                Remove Will Watch
+                Remove
               </button>
             ) : (
               <button 
@@ -42,7 +42,7 @@ class Movie extends React.Component {
                   addWillWatchMovie(data)
                 }}
               >
-                Add Will Watch
+                Add Watch
               </button>
             )}
           </div>
